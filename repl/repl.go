@@ -4,9 +4,9 @@ import (
 	"bufio"
 	"fmt"
 	"io"
+	"monkey/evaluator"
 	"monkey/lexer"
 	"monkey/parser"
-	"monkey/token"
 )
 
 const PROMPT = ">> "
@@ -24,25 +24,32 @@ func Start(in io.Reader, out io.Writer) {
 
 		line := scanner.Text()
 		l := lexer.New(line)
-		fmt.Println("Tokens")
-		fmt.Println("_____________________")
-		for tok := l.NextToken(); tok.Type != token.EOF; tok = l.NextToken() {
-			fmt.Printf("Type: %-10s Literal: %s\n", tok.Type, tok.Literal)
-		}
-		fmt.Println("_____________________")
+		// fmt.Println("Tokens")
+		// fmt.Println("_____________________")
+		// for tok := l.NextToken(); tok.Type != token.EOF; tok = l.NextToken() {
+		// 	fmt.Printf("Type: %-10s Literal: %s\n", tok.Type, tok.Literal)
+		// }
+		// fmt.Println("_____________________")
 
-		l = lexer.New(line)
+		// l = lexer.New(line)
 		p := parser.New(l)
 
 		program := p.ParseProgram()
 		if len(p.Errors()) != 0 {
 			printParserErrors(out, p.Errors())
+			continue
 		}
-		fmt.Println("Parser")
-		fmt.Println("_____________________")
-		io.WriteString(out, program.String())
-		io.WriteString(out, "\n")
-		fmt.Println("_____________________")
+
+		evaluated := evaluator.Eval(program)
+		if evaluated != nil {
+			io.WriteString(out, evaluated.Inspect())
+			io.WriteString(out, "\n")
+		}
+		// fmt.Println("Parser")
+		// fmt.Println("_____________________")
+		// io.WriteString(out, program.String())
+		// io.WriteString(out, "\n")
+		// fmt.Println("_____________________")
 	}
 }
 
