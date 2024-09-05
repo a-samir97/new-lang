@@ -20,7 +20,7 @@ func Eval(node ast.Node) object.Object {
 	case *ast.IntegerLiteral:
 		return &object.Integer{Value: node.Value}
 	case *ast.Boolean:
-		return nativeBooltoBooleanObject(node.Value)
+		return nativeBoolToBooleanObject(node.Value)
 	case *ast.PrefixExpression:
 		right := Eval(node.Right)
 		return evalPrefixExpression(node.Operator, right)
@@ -28,7 +28,7 @@ func Eval(node ast.Node) object.Object {
 	return nil
 }
 
-func nativeBooltoBooleanObject(input bool) object.Object {
+func nativeBoolToBooleanObject(input bool) object.Object {
 	if input {
 		return TRUE
 	}
