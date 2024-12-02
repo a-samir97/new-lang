@@ -39,18 +39,6 @@ To use New Lang, run the following command:
 - **lexer/**: Responsible for lexical analysis. This folder contains the code for breaking down the input source code into tokens that can be further processed by the parser.
 - **parser/**: Responsible for parsing the tokens produced by the lexer into an Abstract Syntax Tree (AST). This folder contains the code for syntactic analysis.
 - **evaluator/**: Contains the code for evaluating the AST nodes. This includes the implementation of evaluation rules for different expressions and statements in the language.
-
-## Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request for any changes.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Contact
-
-For any inquiries, please contact [a.samir97](mailto:a.samir9710@gmail.com).
 ```
 
 For more details on PRs, you can visit the [pull requests page](https://github.com/a-samir97/new-lang/pulls?state=all).
